@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Clock In/Out Site</title>
+    </head>
+    <body>
+        <h1>Clock In/Out</h1>
+
+        {% if clock_in_time %}
+    <p>Current time Clocked In: <b>{{clock_in_time}}</b></p>
+        {% else %}
+            <p>Not clocked in yet</p>
+        {% endif %}
+
+    <form action="/clock_in" method="POST">
+        <button type="Submit">Clock In</button>
+    </form>
+
+    <br>
+
+    <form action="/clock_out" method="POST">
+        <button type="Submit">Clock Out</button>
+    </form>
+    </body>
+</html>
