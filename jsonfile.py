@@ -28,16 +28,21 @@ def employee():
         with open("employeeinfo.json", "w") as file:
             json.dump(employee_data, file)
 
+def main():
+    #asks if user is admin or employee
+    jobchoice = input("Are you an admin or employee?: ")
 
-#asks if user is admin or employee
-jobchoice = input("Are you an admin or employee?: ")
+    #if they are an admin, it goes to the admin function
+    if jobchoice.lower() == "admin":
+        admin()
+    #if employee, then it goes to employee function
+    elif jobchoice.lower() == "employee":
+        employee()
+    #invalid choice if they didn't write any of the choices above
+    else:
+        print("Invalid choice!")
+    
+    return 0
 
-#if they are an admin, it goes to the admin function
-if jobchoice.lower() == "admin":
-    admin()
-#if employee, then it goes to employee function
-elif jobchoice.lower() == "employee":
-    employee()
-#invalid choice if they didn't write any of the choices above
-else:
-    print("Invalid choice!")
+if __name__ == "__main__":
+    main()

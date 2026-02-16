@@ -1,6 +1,8 @@
+import jsonfile
 from datetime import datetime
 
 def main():
+    jsonfile.main()
     choice = input("Would you like to clock in? (yes/no): ")
     if choice.lower() == "yes":
         clock_in_time = datetime.now()
