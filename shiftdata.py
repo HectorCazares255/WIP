@@ -2,6 +2,7 @@ import json
 import main
 import os
 
+# Start shift function that writes to the JSON file when the employee clocks in
 def startShift():
     if os.path.exists("shiftdata.json"):
         with open("shiftdata.json", "r") as file:
@@ -15,6 +16,7 @@ def startShift():
         with open("shiftdata.json", "w") as file:
             json.dump({"ClockedIn": "Yes", "ClockInTime": main.datetime.now().strftime("%H:%M")}, file)
 
+# End shift function that writes to the JSON file when the employee clocks out
 def endShift():
     if os.path.exists("shiftdata.json"):
         with open("shiftdata.json", "r") as file:
@@ -28,6 +30,7 @@ def endShift():
         with open("shiftdata.json", "w") as file:
             json.dump({"ClockedIn": "No", "ClockOutTime": main.datetime.now().strftime("%H:%M")}, file)
 
+# Check shift function that checks if the employee is clocked in or not and calls the appropriate function
 def checkShift():
     if os.path.exists("shiftdata.json"):
         with open("shiftdata.json", "r") as file:
