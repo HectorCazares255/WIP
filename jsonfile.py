@@ -5,19 +5,24 @@ import os
 def admin():
     name = input("Welcome Admin! Please enter your name: ")
     email = input("Please enter your email: ")
-    password = input("Please enter your password?: ")
+    password = input("Please enter your password: ")
 
     add_employee = input("Would you like to add an employee? (yes/no): ")
     if add_employee.lower() == "yes":
         addEmployee()
+    elif add_employee.lower() == "no":
+        print("No new employees added.")
+    else:
+        print("Invalid option!")
 
 def addEmployee():
+    occupation = "Employee"
     name = input("Please enter the employee's name: ")
     email = input("Please enter the employee's email: ")
     password = input("Please enter the employee's password?: ")
 
     #saves answers in a dictionary
-    employee_data = { "Name": name, "Email": email, "Password": password }
+    employee_data = { "Occupation": occupation, "Name": name, "Email": email, "Password": password }
 
     #checking if the JSON file exists, if it does, we dump dictionary info inside
     if os.path.exists("employeeinfo.json"):
