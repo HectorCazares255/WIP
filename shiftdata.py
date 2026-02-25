@@ -1,45 +1,35 @@
 import json
 import main
 import os
+from datetime import datetime
 
-# Start shift function that writes to the JSON file when the employee clocks in
+SHIFT_FILE = "shiftdata.json"
+
+def _read_shift():
+    if not os.path.exists(SHIFT_FILE):
+        return {"ClockedIn": "No"}
+    try:
+        with open(SHIFT_FILE, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {"ClockedIn": "No"}
+
+def _write_shift(data):
+    with open(SHIFT_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
 def startShift():
-    if os.path.exists("shiftdata.json"):
-        with open("shiftdata.json", "r") as file:
-            data = json.load(file)
-            data["ClockedIn"] = "Yes"
-            data["ClockInTime"] = main.datetime.now().strftime("%H:%M")
-            with open("shiftdata.json", "w") as file:
-                json.dump(data, file)
-    else:
-        print("Error occurred. Trying again...")
-        with open("shiftdata.json", "w") as file:
-            json.dump({"ClockedIn": "Yes", "ClockInTime": main.datetime.now().strftime("%H:%M")}, file)
+    data = _read_shift()
+    data["ClockedIn"] = "Yes"
+    data["ClockInTime"] = datetime.now().strftime("%H:%M")
+    _write_shift(data)
 
-# End shift function that writes to the JSON file when the employee clocks out
 def endShift():
-    if os.path.exists("shiftdata.json"):
-        with open("shiftdata.json", "r") as file:
-            data = json.load(file)
-            data["ClockedIn"] = "No"
-            data["ClockOutTime"] = main.datetime.now().strftime("%H:%M")
-            with open("shiftdata.json", "w") as file:
-                json.dump(data, file)
-    else:
-        print("Error occurred. Trying again...")
-        with open("shiftdata.json", "w") as file:
-            json.dump({"ClockedIn": "No", "ClockOutTime": main.datetime.now().strftime("%H:%M")}, file)
+    data = _read_shift()
+    data["ClockedIn"] = "No"
+    data["ClockOutTime"] = datetime.now().strftime("%H:%M")
+    _write_shift(data)
 
-# Check shift function that checks if the employee is clocked in or not and calls the appropriate function
 def checkShift():
-    if os.path.exists("shiftdata.json"):
-        with open("shiftdata.json", "r") as file:
-            data = json.load(file)
-            if data["ClockedIn"] == "No":
-                main.clockIn()
-            else:
-                main.clockOut()
-    else:
-        print("Error occurred. Trying again...")
-        with open("shiftdata.json", "w") as file:
-            json.dump({"ClockedIn": "No"}, file)
+    data = _read_shift()
+    return data.get("ClockedIn", "No")   

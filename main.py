@@ -1,53 +1,58 @@
 import json
-import jsonfile
-import shiftdata
 from datetime import datetime
+import shiftdata
 
-# Clock in function that checks if the employee wants to clock in and calls the start shift function
 def clockIn():
-    print("Would you like to clock in? (yes/no): ")
-    clock_in_response = input()
-    if clock_in_response.lower() == "yes":
-        shiftdata.startShift()
-        clock_in_time = datetime.now()
-        clock_in = clock_in_time.strftime("%H:%M")
-        print("Clocked in at:", clock_in)
+    shiftdata.startShift()  
+    with open("shiftdata.json", "r") as file:
+        data = json.load(file)
+    return data.get("ClockInTime")
 
-# Clock out function that checks if the employee wants to clock out and calls the end shift function, also calculates total time worked
 def clockOut():
-    print("Would you like to clock out? (yes/no): ")
-    clock_out_response = input()
-    if clock_out_response.lower() == "yes":
-        shiftdata.endShift()
-        clock_out_time = datetime.now()
-        with open("shiftdata.json", "r") as file: # Reads the JSON file to get the clock in and clock out time
-            data = json.load(file)
-            clock_in_time = datetime.strptime(data["ClockInTime"], "%H:%M")
-            clock_out_time = datetime.strptime(data["ClockOutTime"], "%H:%M")
-        shift_start = (clock_in_time.hour * 60) + clock_in_time.minute # Converts shift start time to minutes
-        shift_end = (clock_out_time.hour * 60) + clock_out_time.minute  # Converts shift end time to minutes
-        time_worked_hours = (shift_end - shift_start)/60    # Finds total hours worked
-        time_worked_minutes = (shift_end - shift_start)%60  # Finds remaining minutes worked
-        clock_out = clock_out_time.strftime("%H:%M")
+    shiftdata.endShift()  
 
-        # Updates the total hours worked in the JSON file
-        with open("hours.json", "r") as file: # Reads the JSON file to get the total hours worked
-            data = json.load(file)
-            total_hours_worked = data.get("TotalHoursWorked", 0)
-            total_minutes_worked = data.get("TotalMinutesWorked", 0)
-        total_hours_worked += int(time_worked_hours) # Adds the hours worked to the total hours worked
-        total_minutes_worked += time_worked_minutes # Adds the minutes worked to the total minutes worked
-        with open("hours.json", "w") as file: # Writes the total hours worked to the JSON file
-            json.dump({"TotalHoursWorked": total_hours_worked, "TotalMinutesWorked": total_minutes_worked}, file)
+    with open("shiftdata.json", "r") as file:
+        data = json.load(file)
 
-        print("Clocked out at:", clock_out)
-        print("Time worked:", int(time_worked_hours), "hour(s) and", time_worked_minutes, "minute(s)")
+    clock_in_str = data.get("ClockInTime")
+    clock_out_str = data.get("ClockOutTime")
 
-def main():
-    ##jsonfile.main()
-    shiftdata.checkShift()
-    return 0
+    if not clock_in_str or not clock_out_str:
+        raise ValueError("ClockInTime or ClockOutTime missing in shiftdata.json")
 
+    clock_in_time = datetime.strptime(clock_in_str, "%H:%M")
+    clock_out_time = datetime.strptime(clock_out_str, "%H:%M")
 
-if __name__ == "__main__":
-    main()
+    start_min = clock_in_time.hour * 60 + clock_in_time.minute
+    end_min = clock_out_time.hour * 60 + clock_out_time.minute
+
+    total_minutes = end_min - start_min
+    if total_minutes < 0:
+        total_minutes += 24 * 60  
+    worked_hours = total_minutes // 60
+    worked_minutes = total_minutes % 60
+
+    try:
+        with open("hours.json", "r") as file:
+            totals = json.load(file)
+    except FileNotFoundError:
+        totals = {"TotalHoursWorked": 0, "TotalMinutesWorked": 0}
+
+    totals["TotalHoursWorked"] = totals.get("TotalHoursWorked", 0) + int(worked_hours)
+    totals["TotalMinutesWorked"] = totals.get("TotalMinutesWorked", 0) + int(worked_minutes)
+
+    # normalize minutes into hours
+    extra = totals["TotalMinutesWorked"] // 60
+    totals["TotalHoursWorked"] += extra
+    totals["TotalMinutesWorked"] %= 60
+
+    with open("hours.json", "w") as file:
+        json.dump(totals, file, indent=2)
+
+    return {
+        "clock_in": clock_in_str,
+        "clock_out": clock_out_str,
+        "worked_hours": int(worked_hours),
+        "worked_minutes": int(worked_minutes),
+        "totals": totals
+    }
