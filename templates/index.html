@@ -1,24 +1,35 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Clock In/Out Site</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <h1>Clock In/Out</h1>
+    <body class="body">
+        <h1 class="h1">Employee Time Clock</h1>
 
-        {% if clock_in_time %}
-    <p>Current time Clocked In: <b>{{clock_in_time}}</b></p>
-        {% else %}
-            <p>Not clocked in yet</p>
-        {% endif %}
 
-    <form action="/clock_in" method="POST">
-        <button type="Submit">Clock In</button>
-    </form>
+        <div class="sessioninfo">
+            <p class="welcome"><b>Welcome, {{ employee_name }}</b></p>
+            <p><b>Status:</b>&nbsp;{{ "Clocked In" if clocked_in == "Yes" else "Clocked Out" }}</p>
+            <p><b>Clock In:</b>&nbsp;{{ clock_in if clock_in else "—" }}</p>
+            <p><b>Clock Out:</b>&nbsp;{{ clock_out if clock_out else "—" }}</p>
+            <p><b>Total:</b>&nbsp;{{ total_hours }} hour(s) {{ total_minutes }} minute(s)</p>
+        </div>
 
-    <br>
+        <div class="buttonlayout">
+        <form  action="/clock-in" method="POST">
+            <button type="submit">Clock In</button>
+        </form>
 
-    <form action="/clock_out" method="POST">
-        <button type="Submit">Clock Out</button>
-    </form>
+        <form  action="/clock-out" method="POST">
+            <button type="submit">Clock Out</button>
+        </form>
+        </div>
+
+        <form action="/logout" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+
     </body>
 </html>
