@@ -50,6 +50,7 @@ def startShift(employee_id):
     data = _read_shift(employee_id)
     data["ClockedIn"] = "Yes"
     data["ClockInTime"] = datetime.now().strftime("%H:%M")
+    data["ClockOutTime"] = ""
     _write_shift(employee_id, data)
 
 
