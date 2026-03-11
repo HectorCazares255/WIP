@@ -14,4 +14,8 @@ Team members:
 ![Use Case Diagram](IMAGES/Case-Diagram.jpg)
 
 # How the UI looks like so far
-![UI](IMAGES/UI1.png)
+![UI1](IMAGES/UI1.png)
+![UI2](IMAGES/UI2.png)
+![UI3](IMAGES/UI3.png)
+![UI4](IMAGES/UI4.png)
+![UI4](IMAGES/UI5.png)
