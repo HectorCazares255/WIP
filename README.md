@@ -9,3 +9,5 @@ Team members:
 
 
 [Google Slides](https://docs.google.com/presentation/d/18uRfRey31XJhuZI4tc-6GPvCoOF6YLPhWeKjRf3ocUE/edit?usp=sharing)
+
+[Class Diagram]("IMAGES/Class Diagram.jpg")
