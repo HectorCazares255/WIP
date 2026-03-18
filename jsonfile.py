@@ -73,7 +73,13 @@ def changeSchedule():
             return
         for schedule in schedules:
             if schedule.get("ID") == int(id):
-                print(schedule)
+                print("Monday:", schedule.get("Monday"))
+                print("Tuesday:", schedule.get("Tuesday"))
+                print("Wednesday:", schedule.get("Wednesday"))
+                print("Thursday:", schedule.get("Thursday"))
+                print("Friday:", schedule.get("Friday"))
+                print("Saturday:", schedule.get("Saturday"))
+                print("Sunday:", schedule.get("Sunday"))
                 break
         else:
             print("Employee ID not found in schedule records.")
