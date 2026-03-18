@@ -18,6 +18,7 @@ def admin():
     else:
         print("Invalid option!")
 
+#function to add employees, which contains their occupation, name, email, password, and ID
 def addEmployee():
     occupation = "Employee"
     name = input("Please enter the employee's name: ")
@@ -25,6 +26,7 @@ def addEmployee():
     password = input("Please enter the employee's password?: ")
     id = random.sample(range(100000, 999999), 1)
 
+    #dictionary stores the info
     employee_data = {
         "Occupation": occupation,
         "Name": name,
@@ -47,6 +49,7 @@ def addEmployee():
     with open("employeeinfo.json", "w") as file:
         json.dump(employees, file, indent=2)
 
+#function that runs when the person picks employee
 def employee():
     global currentEmployeeID
 
@@ -75,6 +78,7 @@ def employee():
     else:
         print("No employee records found.")
 
+#main function, where tou decide if you're an admin or employee accordingly
 def main():
     jobchoice = input("Are you an admin or employee?: ")
 
