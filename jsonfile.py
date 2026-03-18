@@ -18,6 +18,14 @@ def admin():
     else:
         print("Invalid option!")
 
+    change_schedule = input("Would you like to change an employee's schedule? (yes/no): ")
+    if change_schedule.lower() == "yes":
+        changeSchedule()
+    elif change_schedule.lower() == "no":
+        print("No schedule changes made.")
+    else:
+        print("Invalid option!")
+
 #function to add employees, which contains their occupation, name, email, password, and ID
 def addEmployee():
     occupation = "Employee"
@@ -48,6 +56,49 @@ def addEmployee():
 
     with open("employeeinfo.json", "w") as file:
         json.dump(employees, file, indent=2)
+
+# This function will allow the admin to change the schedule of an employee
+def changeSchedule():
+    id = input("Please enter the employee's ID: ")
+
+    #prints out the current schedule for the employee, so the admin can see what they are changing
+    print("Current schedule for employee ID", id + ":")
+    schedule_file = "schedule.json"
+    if os.path.exists(schedule_file):
+        try:
+            with open(schedule_file, "r") as file:
+                schedules = json.load(file)
+        except json.JSONDecodeError:
+            print("Schedule file is corrupted.")
+            return
+        for schedule in schedules:
+            if schedule.get("ID") == int(id):
+                print(schedule)
+                break
+        else:
+            print("Employee ID not found in schedule records.")
+            return
+        
+    day = input("Please enter the day of the week to change (e.g., Monday): ")
+    new_schedule = input("Please enter the new schedule (e.g., 9:00-17:00 or Off): ")
+    schedule_file = "schedule.json"
+    if os.path.exists(schedule_file):
+        try:
+            with open(schedule_file, "r") as file:
+                schedules = json.load(file)
+        except json.JSONDecodeError:
+            schedules = []
+        for schedule in schedules:
+            if schedule.get("ID") == int(id):
+                schedule[day] = new_schedule
+                break
+        else:
+            print("Employee ID not found in schedule records.")
+            return
+        with open(schedule_file, "w") as file:
+            json.dump(schedules, file, indent=2)
+    else:
+        print("Schedule file not found. No changes made.")
 
 #function that runs when the person picks employee
 def employee():
