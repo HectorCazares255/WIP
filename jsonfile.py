@@ -23,7 +23,7 @@ def addEmployee():
     name = input("Please enter the employee's name: ")
     email = input("Please enter the employee's email: ")
     password = input("Please enter the employee's password?: ")
-    id = random.randint(100000, 999999)
+    id = random.sample(range(100000, 999999), 1)
 
     employee_data = {
         "Occupation": occupation,
