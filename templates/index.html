@@ -25,11 +25,16 @@
         <form  action="/clock-out" method="POST">
             <button type="submit">Clock Out</button>
         </form>
+
+        {% if session.get("employee_occupation") == "Admin" %}
+            <form action="{{ url_for('admin_dashboard') }}" method="get">
+                <button>Go to Admin Dashboard</button>
+            </form>
+        {% endif %}
         </div>
 
         <form action="/logout" method="GET">
             <button type="submit">Logout</button>
         </form>
-
     </body>
 </html>

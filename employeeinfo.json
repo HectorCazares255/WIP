@@ -19,5 +19,12 @@
         "Email": "john@test.com",
         "Password": "John",
         "ID": 123456
+    },
+    {
+        "Occupation": "Admin",
+        "Name": "Jane",
+        "Email": "jane@test.com",
+        "Password": "Jane",
+        "ID": 654321
     }
 ]
