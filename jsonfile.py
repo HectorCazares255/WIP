@@ -10,6 +10,21 @@ def admin():
     email = input("Please enter your email: ")
     password = input("Please enter your password: ")
 
+    # Check if the admin credentials are correct
+    if os.path.exists("employeeinfo.json"):
+        with open("employeeinfo.json", "r") as file:
+            employees = json.load(file)
+        for employee in employees:
+            if employee.get("Occupation") == "Admin" and employee.get("Name") == name and employee.get("Email") == email and employee.get("Password") == password:
+                print("Admin credentials verified.")
+                break
+        else:
+            print("Invalid admin credentials.")
+            return
+    else:
+        print("No employee records found.")
+        return
+    
     add_employee = input("Would you like to add an employee? (yes/no): ")
     if add_employee.lower() == "yes":
         addEmployee()
@@ -106,6 +121,31 @@ def changeSchedule():
     else:
         print("Schedule file not found. No changes made.")
 
+def getSchedule(id):
+    #prints out the current schedule for the employee, so the employee can see when they are working
+    print("Current schedule for employee ID", id , ":")
+    schedule_file = "schedule.json"
+    if os.path.exists(schedule_file):
+        try:
+            with open(schedule_file, "r") as file:
+                schedules = json.load(file)
+        except json.JSONDecodeError:
+            print("Schedule file is corrupted.")
+            return
+        for schedule in schedules:
+            if schedule.get("ID") == int(id):
+                print("Monday:", schedule.get("Monday"))
+                print("Tuesday:", schedule.get("Tuesday"))
+                print("Wednesday:", schedule.get("Wednesday"))
+                print("Thursday:", schedule.get("Thursday"))
+                print("Friday:", schedule.get("Friday"))
+                print("Saturday:", schedule.get("Saturday"))
+                print("Sunday:", schedule.get("Sunday"))
+                break
+        else:
+            print("Employee ID not found in schedule records.")
+            return
+        
 #function that runs when the person picks employee
 def employee():
     global currentEmployeeID
@@ -129,6 +169,15 @@ def employee():
             ):
                 print("Welcome back", name + "!")
                 currentEmployeeID = data["ID"]
+
+                get_schedule = input("Would you like to view your schedule? (yes/no): ")
+                if get_schedule.lower() == "yes":
+                    getSchedule(currentEmployeeID)
+                elif get_schedule.lower() == "no":
+                    print("No schedule displayed.")
+                else:
+                    print("Invalid option!")
+
                 return
 
         print("Invalid credentials. Please try again.")
