@@ -5,6 +5,7 @@ import shiftdata
 
 HOURS_FILE = "hours.json"
 SHIFT_FILE = "shiftdata.json"
+EMPLOYEE_FILE = "employeeinfo.json"
 
 
 def read_json_file(path, default):
@@ -91,6 +92,14 @@ def clockOut(employee_id):
         hours_records.append(new_record)
 
     write_json_file(HOURS_FILE, hours_records)
+
+    print(f"Total worked time: {worked_hours} hours and {worked_minutes} minutes.")
+    payment_records = read_json_file(EMPLOYEE_FILE, [])
+    for employee in payment_records:
+        if employee.get("ID") == employee_id:
+            hourly_rate = employee.get("HourlyRate")
+            print(f"Money earned: ${worked_hours * hourly_rate + (worked_minutes / 60) * hourly_rate:.2f}")
+            break
 
     return {
         "clock_in": clock_in_str,
