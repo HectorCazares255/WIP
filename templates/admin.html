@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
+    <div class="admin_head">
         <h1>Admin Dashboard</h1>
-        <p><b>Welcome, </b>&nbsp;{{ admin_name }}</p>
 
-        <p>
+        <div class="buttonnadmin">
             <form action="{{ url_for('index') }}" method="get">
                 <button type="submit">Back to Home</button>
             </form>
             <form action="{{ url_for('logout') }}" method="get">
                 <button type="submit">Logout</button>
             </form>
-        </p>
+        </div>
+    </div>   
+        <h2 class="welcomeadmin"><b>Welcome, </b>&nbsp;{{ admin_name }}</h2>
 
         {% if message %}
             <p class="success">{{ message }}</p>
@@ -28,7 +29,9 @@
             <p class="error">{{ error }}</p>
         {% endif %}
 
-        <div class="admin-section">
+        <div class="grid">
+
+        <div class="employee_track">
             <h2>Currently Clocked In</h2>
 
             {% if clocked_in_employees %}
@@ -49,11 +52,15 @@
                     {% endfor %}
                 </table>
             {% else %}
-                <p>No employees are currently clocked in.</p>
+                <p style="font-size: 14px">No employees are currently clocked in.</p>
             {% endif %}
         </div>
 
-        <div class="admin-section">
+        <div>
+            <br><br></b>
+        </div>
+
+        <div class="employee_create">
             <h2>Create Employee Account</h2>
 
             <form method="POST" action="{{ url_for('admin_dashboard') }}">
@@ -78,6 +85,7 @@
                 <button type="submit">Create Account</button>
             </form>
         </div>
+    </div>
     </div>
 </body>
 </html>
