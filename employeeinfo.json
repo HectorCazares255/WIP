@@ -4,27 +4,32 @@
         "Name": "Test1",
         "Email": "Test1",
         "Password": "Test1",
-        "ID": 521207
+        "ID": 521207,
+        "HourlyRate": 16.00
     },
     {
         "Occupation": "Employee",
         "Name": "Test2",
         "Email": "Test2",
         "Password": "Test2",
-        "ID": 787890
+        "ID": 787890,
+        "HourlyRate": 16.00
     },
     {
         "Occupation": "Employee",
         "Name": "John",
         "Email": "john@test.com",
         "Password": "John",
-        "ID": 123456
+        "ID": 123456,
+        "HourlyRate": 16.00
+
     },
     {
         "Occupation": "Admin",
         "Name": "Jane",
         "Email": "jane@test.com",
         "Password": "Jane",
-        "ID": 654321
+        "ID": 654321,
+        "HourlyRate": 20.00
     }
 ]
