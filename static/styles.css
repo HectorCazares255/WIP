@@ -1,7 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(0, 0, 0);
-    background-color: rgb(44, 93, 146);
+    background-color: rgb(59, 97, 138);
     margin: 0;
     padding: 0;
 }
@@ -35,25 +35,29 @@ form {
 
 button {
     margin-top: 10px;
-    border: 4px solid rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     padding: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 16px;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
     align-items: center;
     display: flex;
     justify-content: center;
     flex-direction: row;
-
 }
 
 button:hover {
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(212, 211, 211);
     cursor: pointer;
     text-decoration: underline;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
+}
+
+button:active {
+    background-color: rgb(255, 255, 255);
+    box-shadow: none;
 }
 
 .sessioninfo {
@@ -110,12 +114,44 @@ input:focus {
     border: 2px solid black;
     justify-content: left;
     flex-wrap: wrap;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.employee_track h2 {
+    color: black;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.employee_track table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.employee_track th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+}
+
+.employee_track td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.employee_track th,
+.employee_track td {
+    width: 33%;
 }
 
 .employee_create {
     background-color: white;
     border: 2px solid black;
-    margin:auto;
+    margin: auto;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .employee_create h2 {
@@ -137,7 +173,7 @@ input:focus {
 }
 
 .welcomeadmin {
-    font-size: 30px;
+    font-size: 40px;
     color: rgb(0, 0, 0);
     text-align: center;
     margin: 10px;
@@ -149,9 +185,41 @@ input:focus {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    border-bottom: 2px solid black;
+}
+
+.admin_head h1 {
+    font-size: 32px;
+    color: rgb(0, 0, 0);
+    margin-left: 24px;
 }
 
 .buttonnadmin {
     display: flex;
     gap: 10px;
+    margin-right: 24px;
+}
+
+.employee_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.employee_form label {
+    font-size: 21px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 5px;
+
+}
+
+.employee_form select {
+    padding: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
 }

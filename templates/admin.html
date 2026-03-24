@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
     <div class="admin_head">
         <h1>Admin Dashboard</h1>
 
@@ -14,22 +15,24 @@
             <form action="{{ url_for('index') }}" method="get">
                 <button type="submit">Back to Home</button>
             </form>
+
             <form action="{{ url_for('logout') }}" method="get">
                 <button type="submit">Logout</button>
             </form>
         </div>
-    </div>   
-        <h2 class="welcomeadmin"><b>Welcome, </b>&nbsp;{{ admin_name }}</h2>
+    </div>
 
-        {% if message %}
-            <p class="success">{{ message }}</p>
-        {% endif %}
+    <h2 class="welcomeadmin">Welcome, &nbsp;{{ admin_name }}</h2>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+    {% if message %}
+        <p class="success">{{ message }}</p>
+    {% endif %}
 
-        <div class="grid">
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <div class="grid">
 
         <div class="employee_track">
             <h2>Currently Clocked In</h2>
@@ -39,53 +42,48 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Clock In Time</th>
                     </tr>
                     {% for employee in clocked_in_employees %}
                     <tr>
                         <td>{{ employee.ID }}</td>
                         <td>{{ employee.Name }}</td>
-                        <td>{{ employee.Email }}</td>
                         <td>{{ employee.ClockInTime }}</td>
                     </tr>
                     {% endfor %}
                 </table>
             {% else %}
-                <p style="font-size: 14px">No employees are currently clocked in.</p>
+                <p class="no-employees">No employees are currently clocked in.</p>
             {% endif %}
-        </div>
-
-        <div>
-            <br><br></b>
         </div>
 
         <div class="employee_create">
             <h2>Create Employee Account</h2>
 
-            <form method="POST" action="{{ url_for('admin_dashboard') }}">
-                <label for="id">Employee ID:</label><br>
-                <input type="number" name="id" required><br><br>
+            <form method="POST" action="{{ url_for('admin_dashboard') }}" class="employee_form">
+                <label for="id">Employee ID:</label>
+                <input type="number" name="id" id="id" required>
 
-                <label for="name">Name:</label><br>
-                <input type="text" name="name" required><br><br>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required>
 
-                <label for="email">Email:</label><br>
-                <input type="email" name="email" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
 
-                <label for="password">Password:</label><br>
-                <input type="text" name="password" required><br><br>
+                <label for="password">Password:</label>
+                <input type="text" name="password" id="password" required>
 
-                <label for="occupation">Occupation:</label><br>
-                <select name="occupation" required>
+                <label for="occupation">Occupation:</label>
+                <select name="occupation" id="occupation" required>
                     <option value="Employee">Employee</option>
                     <option value="Admin">Admin</option>
-                </select><br><br>
+                </select>
 
                 <button type="submit">Create Account</button>
             </form>
         </div>
+
     </div>
-    </div>
+
 </body>
 </html>

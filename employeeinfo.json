@@ -1,35 +1,50 @@
 [
-    {
-        "Occupation": "Employee",
-        "Name": "Test1",
-        "Email": "Test1",
-        "Password": "Test1",
-        "ID": 521207,
-        "HourlyRate": 16.00
-    },
-    {
-        "Occupation": "Employee",
-        "Name": "Test2",
-        "Email": "Test2",
-        "Password": "Test2",
-        "ID": 787890,
-        "HourlyRate": 16.00
-    },
-    {
-        "Occupation": "Employee",
-        "Name": "John",
-        "Email": "john@test.com",
-        "Password": "John",
-        "ID": 123456,
-        "HourlyRate": 16.00
-
-    },
-    {
-        "Occupation": "Admin",
-        "Name": "Jane",
-        "Email": "jane@test.com",
-        "Password": "Jane",
-        "ID": 654321,
-        "HourlyRate": 20.00
-    }
+  {
+    "Occupation": "Employee",
+    "Name": "Maria",
+    "Email": "maria@test.com",
+    "Password": "Maria",
+    "ID": 521207,
+    "HourlyRate": 16.0
+  },
+  {
+    "Occupation": "Employee",
+    "Name": "Arturo",
+    "Email": "arturo@test.com",
+    "Password": "Arturo",
+    "ID": 787890,
+    "HourlyRate": 16.0
+  },
+  {
+    "Occupation": "Employee",
+    "Name": "John",
+    "Email": "john@test.com",
+    "Password": "John",
+    "ID": 123456,
+    "HourlyRate": 16.0
+  },
+  {
+    "Occupation": "Admin",
+    "Name": "Jane",
+    "Email": "jane@test.com",
+    "Password": "Jane",
+    "ID": 654321,
+    "HourlyRate": 20.0
+  },
+  {
+    "ID": 386779,
+    "Name": "Daniel",
+    "Email": "daniel@test.com",
+    "Password": "Daniel",
+    "Occupation": "Admin",
+    "HourlyRate": 20.0
+  },
+  {
+    "ID": 345829,
+    "Name": "Ryan",
+    "Email": "ryan@test.com",
+    "Password": "Ryan",
+    "Occupation": "Employee",
+    "HourlyRate": 16.0
+  }
 ]
