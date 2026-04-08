@@ -48,7 +48,7 @@ def checkShiftTime(employee_id):
                     print("It is not time for you to work yet. You are scheduled for ", scheduled_time)
                     return False
                 elif int(current_time.split(":")[0]) * 60 + int(current_time.split(":")[1]) > int(scheduled_time.split("-")[1].split(":")[0]) * 60 + int(scheduled_time.split("-")[1].split(":")[1]):
-                    print("You are past your scheduled time to work. Please clock out immediately.")
+                    print("You clocked out past your scheduled time to work. Please try to clock out on time next time.")
                     return True
                 else:
                     return True
