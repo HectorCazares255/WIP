@@ -22,8 +22,44 @@ def write_json_file(path, data):
     with open(path, "w") as file:
         json.dump(data, file, indent=2)
 
+def checkShiftTime(employee_id):
+    # This function will check the current time and compare it to the schedule of the employee
+    # If it isn't time for the employee to work, it will not allow them to clock in
+    # If it is past time for the employee to clock out, it will give them a warning
+    id = employee_id
+    schedule_file = "schedule.json"
+    if os.path.exists(schedule_file):
+        try:
+            with open(schedule_file, "r") as file:
+                schedules = json.load(file)
+        except json.JSONDecodeError:
+            print("Schedule file is corrupted.")
+            return False
+        for schedule in schedules:
+            if schedule.get("ID") == int(id):
+                current_day = datetime.now().strftime("%A")
+                current_time = datetime.now().strftime("%H:%M")
+                scheduled_time = schedule.get(current_day)
+                if scheduled_time == "Off":
+                    print("You are not scheduled to work today.")
+                    return False
+                # Converts the current time and scheduled time to minutes for easier comparison
+                elif int(current_time.split(":")[0]) * 60 + int(current_time.split(":")[1]) < int(scheduled_time.split("-")[0].split(":")[0]) * 60 + int(scheduled_time.split("-")[0].split(":")[1]):
+                    print("It is not time for you to work yet. You are scheduled for ", scheduled_time)
+                    return False
+                elif int(current_time.split(":")[0]) * 60 + int(current_time.split(":")[1]) > int(scheduled_time.split("-")[1].split(":")[0]) * 60 + int(scheduled_time.split("-")[1].split(":")[1]):
+                    print("You are past your scheduled time to work. Please clock out immediately.")
+                    return True
+                else:
+                    return True
+        else:
+            print("Employee ID not found in schedule records.")
+            return False
 
 def clockIn(employee_id):
+    if not checkShiftTime(employee_id):
+        return None
+
     shiftdata.startShift(employee_id)
 
     shifts = read_json_file(SHIFT_FILE, [])
@@ -35,6 +71,9 @@ def clockIn(employee_id):
 
 
 def clockOut(employee_id):
+    if not checkShiftTime(employee_id):
+        return None
+
     shiftdata.endShift(employee_id)
 
     shifts = read_json_file(SHIFT_FILE, [])
