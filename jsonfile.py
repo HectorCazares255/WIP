@@ -40,6 +40,12 @@ def admin():
         print("No schedule changes made.")
     else:
         print("Invalid option!")
+    
+    pay_employees = input("Would you like to pay employees? (yes/no): ")
+    if pay_employees.lower() == "yes":
+        payEmployees()
+    elif pay_employees.lower() == "no":
+        print("Employees have not been paid.")
 
 #function to add employees, which contains their occupation, name, email, password, and ID
 def addEmployee():
@@ -120,6 +126,20 @@ def changeSchedule():
             json.dump(schedules, file, indent=2)
     else:
         print("Schedule file not found. No changes made.")
+
+def payEmployees():
+    #function to pay employees, which will be used by the admin
+    if os.path.exists("hours.json"):
+        with open("hours.json", "r") as file:
+            hours_data = json.load(file)
+        for record in hours_data:
+            record["TotalHoursWorked"] = 0
+            record["TotalMinutesWorked"] = 0
+        with open("hours.json", "w") as file:            
+            json.dump(hours_data, file, indent=2)
+        print("Employees have been paid!")
+    else:
+        print("No hours data found.")
 
 def getSchedule(id):
     #prints out the current schedule for the employee, so the employee can see when they are working
