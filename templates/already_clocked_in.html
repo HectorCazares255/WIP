@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clocked Out</title>
+    <title>Already Clocked In</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="clockin_message_box">
-        <h1>You Have Clocked Out</h1>
+    <div class="clock_message_box">
+        <h1>Already Clocked In</h1>
+        <p>{{ employee_name }}, you are already clocked in.</p>
+        <p><b>Start Time:</b> {{ start_time }}</p>
 
-        <p><b>Start Time: </b>&nbsp; {{ start_time }}</p>
-        <p><b>End Time: </b>&nbsp; {{ end_time }}</p>
-        <p><b>Total Time Worked:</b>&nbsp; {{ total_hours }} hour(s) {{ total_minutes }} minute(s)</p>
-
-        <div class="clockin_buttons">
+        <div class="clock_message_buttons">
             <form action="{{ url_for('index') }}" method="get">
                 <button type="submit">Back to Home</button>
             </form>

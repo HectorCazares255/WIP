@@ -143,7 +143,7 @@ def index():
 
     return render_template(
         "index.html",
-        Name=session.get("employee_name"),
+        employee_name=session.get("employee_name"),
         total_hours=total_hours,
         total_minutes=total_minutes,
         clocked_in=clocked_in,
@@ -216,6 +216,16 @@ def clock_in():
 
     employee_id = session["employee_id"]
 
+    shift_data = read_json("shiftdata.json", [])
+    employee_shift = find_employee_record(shift_data, employee_id)
+
+    if employee_shift.get("ClockedIn") == "Yes":
+        return render_template(
+            "already_clocked_in.html",
+            employee_name=session.get("employee_name"),
+            start_time=employee_shift.get("ClockInTime", "Unknown")
+        )
+
     clockIn(employee_id)
 
     shift_data = read_json("shiftdata.json", [])
@@ -239,15 +249,18 @@ def clock_out():
     clockOut(employee_id)
 
     shift_data = read_json("shiftdata.json", [])
+    hours_data = read_json("hours.json", [])
+
     employee_shift = find_employee_record(shift_data, employee_id)
-    start_time = employee_shift.get("ClockInTime", "Unknown")
-    end_time = employee_shift.get("ClockOutTime", "Unknown")
+    employee_hours = find_employee_record(hours_data, employee_id)
 
     return render_template(
         "clockout_success.html",
         employee_name=session.get("employee_name"),
-        start_time=start_time,
-        end_time=end_time
+        start_time=employee_shift.get("ClockInTime", "Unknown"),
+        end_time=employee_shift.get("ClockOutTime", "Unknown"),
+        total_hours=employee_hours.get("TotalHoursWorked", 0),
+        total_minutes=employee_hours.get("TotalMinutesWorked", 0)
     )
 
 if __name__ == "__main__":

@@ -18,5 +18,45 @@
     "Friday": "9:00-17:00",
     "Saturday": "Off",
     "Sunday": "Off"
+  },
+  {
+    "ID": 386779,
+    "Monday": "6:00-17:00",
+    "Tuesday": "6:00-17:00",
+    "Wednesday": "6:00-17:00",
+    "Thursday": "6:00-17:00",
+    "Friday": "6:00-17:00",
+    "Saturday": "Off",
+    "Sunday": "Off"
+  },
+  {
+    "ID": 345829,
+    "Monday": "10:00-17:00",
+    "Tuesday": "6:00-17:00",
+    "Wednesday": "Off",
+    "Thursday": "10:00-17:00",
+    "Friday": "9:00-17:00",
+    "Saturday": "Off",
+    "Sunday": "Off"
+  },
+  {
+    "ID": 123456,
+    "Monday": "Off",
+    "Tuesday": "9:00-17:00",
+    "Wednesday": "Off",
+    "Thursday": "9:00-17:00",
+    "Friday": "9:00-17:00",
+    "Saturday": "Off",
+    "Sunday": "Off"
+  },
+  {
+    "ID": 654321,
+    "Monday": "11:00-17:00",
+    "Tuesday": "11:00-17:00",
+    "Wednesday": "Off",
+    "Thursday": "9:00-17:00",
+    "Friday": "9:00-17:00",
+    "Saturday": "Off",
+    "Sunday": "Off"
   }
 ]
