@@ -36,5 +36,48 @@
         <form action="/logout" method="GET">
             <button type="submit">Logout</button>
         </form>
+
+        <div class="employee_schedule">
+    <h2>My Schedule</h2>
+
+    {% if employee_schedule %}
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Shift</th>
+            </tr>
+            <tr>
+                <td>Monday</td>
+                <td>{{ employee_schedule["Monday"] }}</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>{{ employee_schedule["Tuesday"] }}</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>{{ employee_schedule["Wednesday"] }}</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>{{ employee_schedule["Thursday"] }}</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>{{ employee_schedule["Friday"] }}</td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td>{{ employee_schedule["Saturday"] }}</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>{{ employee_schedule["Sunday"] }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <p>No schedule found.</p>
+    {% endif %}
+</div>
     </body>
 </html>

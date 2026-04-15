@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clocked In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="clockin_message_box">
+        <h1>You Have Clocked In</h1>
+
+        <p><b>Employee:</b> {{ employee_name }}</p>
+        <p><b>Start Time:</b> {{ start_time }}</p>
+
+        <div class="clockin_buttons">
+            <form action="{{ url_for('index') }}" method="get">
+                <button type="submit">Back to Home</button>
+            </form>
+
+            <form action="{{ url_for('logout') }}" method="get">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
