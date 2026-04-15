@@ -27,3 +27,9 @@ Team members:
 ![UI9](IMAGES/UI9.png)
 ![UI10](IMAGES/UI10.png)
 ![UI11](IMAGES/UI11.png)
+
+# Progress Report 4.0
+![UI12](IMAGES/UI12.png)
+![UI13](IMAGES/UI13.png)
+![UI14](IMAGES/UI14.png)
+![UI15](IMAGES/UI15.png)
