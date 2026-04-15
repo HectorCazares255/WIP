@@ -1,6 +1,6 @@
 # README FILE
 
-Starting it with version 0.0
+We decided to make a clock-in/clock-out system
 
 Team members:
 - Hector Cazares
@@ -13,12 +13,13 @@ Team members:
 # Use Case Diagram
 ![Use Case Diagram](IMAGES/Case-Diagram.jpg)
 
-# How the UI looks like so far
-![UI1](IMAGES/UI1.png)
-![UI2](IMAGES/UI2.png)
-![UI3](IMAGES/UI3.png)
-![UI4](IMAGES/UI4.png)
-![UI5](IMAGES/UI5.png)
+## The Latest Project Report
+
+# Progress Report 4.0
+![UI12](IMAGES/UI12.png)
+![UI13](IMAGES/UI13.png)
+![UI14](IMAGES/UI14.png)
+![UI15](IMAGES/UI15.png)
 
 # Progress Report 3.0
 ![UI6](IMAGES/UI6.png)
@@ -28,8 +29,12 @@ Team members:
 ![UI10](IMAGES/UI10.png)
 ![UI11](IMAGES/UI11.png)
 
-# Progress Report 4.0
-![UI12](IMAGES/UI12.png)
-![UI13](IMAGES/UI13.png)
-![UI14](IMAGES/UI14.png)
-![UI15](IMAGES/UI15.png)
+# How the UI looks like so far
+![UI1](IMAGES/UI1.png)
+![UI2](IMAGES/UI2.png)
+![UI3](IMAGES/UI3.png)
+![UI4](IMAGES/UI4.png)
+![UI5](IMAGES/UI5.png)
+
+
+
