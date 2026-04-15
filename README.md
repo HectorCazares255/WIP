@@ -20,6 +20,8 @@ Team members:
 ![UI13](IMAGES/UI13.png)
 ![UI14](IMAGES/UI14.png)
 ![UI15](IMAGES/UI15.png)
+<img width="776" height="489" alt="image" src="https://github.com/user-attachments/assets/0f2253c5-f726-4a9f-b8b1-a1546a9fbe58" />
+
 
 # Progress Report 3.0
 ![UI6](IMAGES/UI6.png)
