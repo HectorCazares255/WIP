@@ -6,6 +6,51 @@ body {
     padding: 0;
 }
 
+body.acc-back {
+    background-image: url("/static/acc_back.jpg");
+    background-size: cover;        
+    background-position: center;   
+    background-repeat: no-repeat;  
+    background-attachment: fixed; 
+}
+
+body.login-back {
+    background-image: url("/static/server_back.jpg");
+    background-size: cover;        /* fills the whole screen */
+    background-position: center;   /* keeps it centered */
+    background-repeat: no-repeat;  /* prevents tiling */
+    background-attachment: fixed;  /* optional: nice scrolling effect */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.login-box {
+    padding: 30px;
+    border-radius: 10px;
+    width: 800px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 3px;
+    border-radius: 6px;
+    border: 1px solid #000000;
+}
+
+.login-box button {
+    margin-top: 15px;
+    width: 60%;
+}
+
 p {
     text-align: center;
     font-size: 18px;
@@ -39,12 +84,21 @@ button {
     padding: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
     align-items: center;
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
+    width: 140px;
+}
+
+.logo_size {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button:hover {
@@ -64,10 +118,11 @@ button:active {
     background-color: rgb(255, 255, 255);
     border-color: black;
     border-width: 2px;
+    border-radius: 10px;
     border-style: solid;
     padding: 10px;
     margin: 20px auto;
-    width: 100%;
+    width: 60%;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;

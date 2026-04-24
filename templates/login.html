@@ -5,27 +5,31 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="body">
-    <h1 class="h1">Employee Login</h1>
+<body class="login-back">
+    <div class="login-container">
+        <div class="login-box">
 
-    <div class="sessioninfo">
-        {% if error %}
-            <p><b>{{ error }}</b></p>
-        {% endif %}
+            <div class="sessioninfo">
+            {% if error %}
+                <p><b>{{ error }}</b></p>
+            {% endif %}
+            <h1 class="h1">Employee Login</h1>
 
-        <form action="/login" method="POST">
-            <p>
-                <label for="email"><b>Email:</b></label><br>
-                <input type="text" name="email" id="email" required>
-            </p>
 
-            <p>
-                <label for="password"><b>Password:</b></label><br>
-                <input type="password" name="password" id="password" required>
-            </p>
+            <form action="/login" method="POST">
+                <p>
+                    <label for="email"><b>Email:</b></label><br>
+                    <input type="text" name="email" id="email" required>
+                </p>
 
-            <button type="submit">Login</button>
-        </form>
+                <p>
+                    <label for="password"><b>Password:</b></label><br>
+                    <input type="password" name="password" id="password" required>
+                </p>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

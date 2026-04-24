@@ -5,8 +5,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="body">
-        <h1 class="h1">Employee Time Clock</h1>
+    <body class="acc-back">
+        <h1 class="h1" style="color: white">Employee Time Clock</h1>
 
 
         <div class="sessioninfo">
@@ -18,22 +18,34 @@
 
         <div class="buttonlayout">
         <form  action="/clock-in" method="POST">
-            <button type="submit">Clock In</button>
+            <button class="clock_in" type="submit">
+                <img class="logo_size" src="{{ url_for('static', filename='clock_in.png') }}" alt="icon">
+                Clock In
+            </button>
         </form>
 
         <form  action="/clock-out" method="POST">
-            <button type="submit">Clock Out</button>
+            <button class="clock_out" type="submit">
+                <img class="logo_size" src="{{ url_for('static', filename='clock_out.png') }}" alt="icon">
+                Clock Out
+            </button>
         </form>
 
         {% if session.get("employee_occupation") == "Admin" %}
             <form action="{{ url_for('admin_dashboard') }}" method="get">
-                <button>Go to Admin Dashboard</button>
+                <button>
+                    <img class="logo_size" src="{{ url_for('static', filename='admin.png') }}" alt="icon">
+                    Admin Dashboard
+                </button>
             </form>
         {% endif %}
         </div>
 
         <form action="/logout" method="GET">
-            <button type="submit">Logout</button>
+            <button type="submit">
+                <img class="logo_size" src="{{ url_for('static', filename='logout.png') }}" alt="icon">
+                Logout
+            </button>
         </form>
 
         <div class="employee_schedule">
