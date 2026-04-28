@@ -3,8 +3,30 @@
     <head>
         <title>Clock In/Out Site</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <div class="user_head">
+        <h1>Welcome, {{ employee_name }}</h1>
+
+        <div class="buttonnadmin">
+
+            {% if session.get("employee_occupation") == "Admin" %}
+            <form action="{{ url_for('admin_dashboard') }}" method="get">
+                <button>
+                    <img class="logo_size" src="{{ url_for('static', filename='admin.png') }}" alt="icon">Admin Dashboard
+                </button>
+            </form>
+            {% endif %}
+
+
+            <form action="{{ url_for('logout') }}" method="get">
+                <button type="submit">
+                    <img class="logo_size" src="{{ url_for('static', filename='logout.png') }}" alt="icon">
+                    Logout</button>
+            </form>
+        </div>
+    </div>
     <body class="acc-back">
         <h1 class="h1" style="color: white">Employee Time Clock</h1>
 
@@ -31,22 +53,8 @@
             </button>
         </form>
 
-        {% if session.get("employee_occupation") == "Admin" %}
-            <form action="{{ url_for('admin_dashboard') }}" method="get">
-                <button>
-                    <img class="logo_size" src="{{ url_for('static', filename='admin.png') }}" alt="icon">
-                    Admin Dashboard
-                </button>
-            </form>
-        {% endif %}
         </div>
 
-        <form action="/logout" method="GET">
-            <button type="submit">
-                <img class="logo_size" src="{{ url_for('static', filename='logout.png') }}" alt="icon">
-                Logout
-            </button>
-        </form>
 
         <div class="employee_schedule">
     <h2>My Schedule</h2>

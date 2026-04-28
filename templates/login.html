@@ -13,9 +13,11 @@
             {% if error %}
                 <p><b>{{ error }}</b></p>
             {% endif %}
-            <h1 class="h1">Employee Login</h1>
+            <div class="logo-section">
+                <img class="logo_img" src="{{ url_for('static', filename='WIPLogo.png') }}" alt="icon" class="logo">
+            </div>
 
-
+            <div class="form-section">
             <form action="/login" method="POST">
                 <p>
                     <label for="email"><b>Email:</b></label><br>
@@ -29,6 +31,7 @@
 
                 <button type="submit">Login</button>
             </form>
+            </div>
         </div>
     </div>
 </body>
