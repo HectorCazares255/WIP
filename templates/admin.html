@@ -92,5 +92,12 @@
 
     </div>
 
+    <form action="{{ url_for('pay_employees') }}" method="post">
+    <button type="submit" style="font-size: 18px">
+        <img class="logo_size" src="{{ url_for('static', filename='bank.png') }}" alt="Pay Icon">
+        Pay Employees
+    </button>
+</form>
+
 </body>
 </html>

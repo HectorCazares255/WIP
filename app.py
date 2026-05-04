@@ -288,5 +288,24 @@ def clock_out():
         warning=late_warning
     )
 
+@app.route("/pay-employees", methods=["POST"])
+def pay_employees():
+    if "employee_id" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("employee_occupation") != "Admin":
+        return "Access denied. Admins only."
+
+    hours_data = read_json("hours.json", [])
+
+    for employee in hours_data:
+        employee["TotalHoursWorked"] = 0
+        employee["TotalMinutesWorked"] = 0
+
+    with open("hours.json", "w") as file:
+        json.dump(hours_data, file, indent=2)
+
+    return redirect(url_for("admin_dashboard"))
+
 if __name__ == "__main__":
     app.run(debug=True)
