@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Already Clocked In</title>
+    <title>Schedule Warning</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body class="message_back">
     <div class="clock_message_box">
-        <h1>Already Clocked In</h1>
-        <p>{{ employee_name }}, you are already clocked in.</p>
-        <p><b>Start Time:</b> {{ start_time }}</p>
+        <h1>Unable to Clock In</h1>
+
+        <p>{{ employee_name }}, {{ message }}</p>
 
         <div class="clock_message_buttons">
             <form action="{{ url_for('index') }}" method="get">

@@ -2,7 +2,7 @@ import json
 import os
 from flask import Flask, render_template, redirect, url_for, request, session
 import shiftdata
-from main import clockIn, clockOut
+from main import checkClockOutTime, checkShiftTime, clockIn, clockOut
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"
@@ -170,6 +170,7 @@ def admin_dashboard():
         password = request.form["password"]
         occupation = request.form["occupation"]
         employee_id = request.form["id"]
+        hourly_rate = float(request.form["hourly_rate"])
 
         employees = load_employees()
 
@@ -190,7 +191,8 @@ def admin_dashboard():
                 "Name": name,
                 "Email": email,
                 "Password": password,
-                "Occupation": occupation
+                "Occupation": occupation,
+                "HourlyRate": hourly_rate
             }
 
             employees.append(new_employee)
@@ -219,6 +221,7 @@ def clock_in():
     shift_data = read_json("shiftdata.json", [])
     employee_shift = find_employee_record(shift_data, employee_id)
 
+    # Already clocked in check
     if employee_shift.get("ClockedIn") == "Yes":
         return render_template(
             "already_clocked_in.html",
@@ -226,6 +229,16 @@ def clock_in():
             start_time=employee_shift.get("ClockInTime", "Unknown")
         )
 
+    shift_check = checkShiftTime(employee_id)
+
+    if not shift_check["allowed"]:
+        return render_template(
+            "schedule_warning.html",
+            employee_name=session.get("employee_name"),
+            message=shift_check["message"]
+        )
+
+    # Now safe to clock in
     clockIn(employee_id)
 
     shift_data = read_json("shiftdata.json", [])
@@ -246,6 +259,17 @@ def clock_out():
 
     employee_id = session["employee_id"]
 
+    shift_data = read_json("shiftdata.json", [])
+    employee_shift = find_employee_record(shift_data, employee_id)
+
+    if employee_shift.get("ClockedIn") != "Yes":
+        return render_template(
+            "not_clocked_in.html",
+            employee_name=session.get("employee_name")
+        )
+
+    late_warning = checkClockOutTime(employee_id)
+
     clockOut(employee_id)
 
     shift_data = read_json("shiftdata.json", [])
@@ -260,7 +284,8 @@ def clock_out():
         start_time=employee_shift.get("ClockInTime", "Unknown"),
         end_time=employee_shift.get("ClockOutTime", "Unknown"),
         total_hours=employee_hours.get("TotalHoursWorked", 0),
-        total_minutes=employee_hours.get("TotalMinutesWorked", 0)
+        total_minutes=employee_hours.get("TotalMinutesWorked", 0),
+        warning=late_warning
     )
 
 if __name__ == "__main__":

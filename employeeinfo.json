@@ -46,5 +46,13 @@
     "Password": "Ryan",
     "Occupation": "Employee",
     "HourlyRate": 16.0
+  },
+  {
+    "ID": 468219,
+    "Name": "Mark",
+    "Email": "mark@test.com",
+    "Password": "Mark",
+    "Occupation": "Admin",
+    "HourlyRate": 20.0
   }
 ]

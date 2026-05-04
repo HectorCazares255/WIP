@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, time
 import shiftdata
 
 HOURS_FILE = "hours.json"
@@ -22,39 +22,72 @@ def write_json_file(path, data):
     with open(path, "w") as file:
         json.dump(data, file, indent=2)
 
+def time_to_minutes(time_string):
+    hour, minute = time_string.split(":")
+    return int(hour) * 60 + int(minute)
+
+
 def checkShiftTime(employee_id):
-    # This function will check the current time and compare it to the schedule of the employee
-    # If it isn't time for the employee to work, it will not allow them to clock in
-    # If it is past time for the employee to clock out, it will give them a warning
-    id = employee_id
-    schedule_file = "schedule.json"
-    if os.path.exists(schedule_file):
-        try:
-            with open(schedule_file, "r") as file:
-                schedules = json.load(file)
-        except json.JSONDecodeError:
-            print("Schedule file is corrupted.")
-            return False
-        for schedule in schedules:
-            if schedule.get("ID") == int(id):
-                current_day = datetime.now().strftime("%A")
-                current_time = datetime.now().strftime("%H:%M")
-                scheduled_time = schedule.get(current_day)
-                if scheduled_time == "Off":
-                    print("You are not scheduled to work today.")
-                    return False
-                # Converts the current time and scheduled time to minutes for easier comparison
-                elif int(current_time.split(":")[0]) * 60 + int(current_time.split(":")[1]) < int(scheduled_time.split("-")[0].split(":")[0]) * 60 + int(scheduled_time.split("-")[0].split(":")[1]):
-                    print("It is not time for you to work yet. You are scheduled for ", scheduled_time)
-                    return False
-                elif int(current_time.split(":")[0]) * 60 + int(current_time.split(":")[1]) > int(scheduled_time.split("-")[1].split(":")[0]) * 60 + int(scheduled_time.split("-")[1].split(":")[1]):
-                    print("You clocked out past your scheduled time to work. Please try to clock out on time next time.")
-                    return True
-                else:
-                    return True
-        else:
-            print("Employee ID not found in schedule records.")
-            return False
+    schedules = read_json_file("schedule.json", [])
+
+    current_day = datetime.now().strftime("%A")
+    current_time = datetime.now().strftime("%H:%M")
+    current_minutes = time_to_minutes(current_time)
+
+    for schedule in schedules:
+        if str(schedule.get("ID")) == str(employee_id):
+            scheduled_time = schedule.get(current_day)
+
+            if scheduled_time == "Off":
+                return {
+                    "allowed": False,
+                    "message": "You are not scheduled to work today."
+                }
+
+            start_time, end_time = scheduled_time.split("-")
+            start_minutes = time_to_minutes(start_time)
+            end_minutes = time_to_minutes(end_time)
+
+            if current_minutes < start_minutes:
+                return {
+                    "allowed": False,
+                    "message": f"It is not time for you to work yet. You are scheduled for {scheduled_time}."
+                }
+
+            return {
+                "allowed": True,
+                "message": "You are allowed to clock in."
+            }
+
+    return {
+        "allowed": False,
+        "message": "Employee schedule was not found."
+    }
+
+
+def checkClockOutTime(employee_id):
+    schedules = read_json_file("schedule.json", [])
+
+    current_day = datetime.now().strftime("%A")
+    current_time = datetime.now().strftime("%H:%M")
+    current_minutes = time_to_minutes(current_time)
+
+    for schedule in schedules:
+        if str(schedule.get("ID")) == str(employee_id):
+            scheduled_time = schedule.get(current_day)
+
+            if scheduled_time == "Off":
+                return None
+
+            start_time, end_time = scheduled_time.split("-")
+            end_minutes = time_to_minutes(end_time)
+
+            if current_minutes > end_minutes:
+                return f"You clocked out past your scheduled end time of {end_time}."
+
+            return None
+
+    return None
 
 def clockIn(employee_id):
     if not checkShiftTime(employee_id):

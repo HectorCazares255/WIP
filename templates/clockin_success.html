@@ -6,7 +6,7 @@
     <title>Clocked In</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body class="message_back">
     <div class="clockin_message_box">
         <h1>You Have Clocked In</h1>
 
@@ -14,11 +14,15 @@
 
         <div class="clockin_buttons">
             <form action="{{ url_for('index') }}" method="get">
-                <button type="submit">Back to Home</button>
+                <button type="submit">
+                <img class="logo_size" src="{{ url_for('static', filename='home.png') }}" alt="Home Icon" class="home_icon">
+                    Back to Home</button>
             </form>
 
             <form action="{{ url_for('logout') }}" method="get">
-                <button type="submit">Logout</button>
+                <button type="submit">
+                <img class="logo_size" src="{{ url_for('static', filename='logout.png') }}" alt="Logout Icon" class="logout_icon">
+                    Logout</button>
             </form>
         </div>
     </div>
